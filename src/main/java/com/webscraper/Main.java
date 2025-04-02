@@ -12,6 +12,11 @@ public class Main {
         try {
             ScraperService scraper = new ScraperService();
             List<String> pdfLinks = scraper.getPdfLinks();
+
+            FileDownloader downloader = new FileDownloader(Config.OUTPUT_FOLDER);
+            for (String link : pdfLinks) {
+                downloader.downloadFile(link);
+            }
         } catch(IOException e){
             e.printStackTrace();
         }
