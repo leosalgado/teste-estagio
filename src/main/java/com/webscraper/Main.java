@@ -1,6 +1,7 @@
 package com.webscraper;
 
 import com.webscraper.scraping.Config;
+import com.webscraper.scraping.FileCompressor;
 import com.webscraper.scraping.FileDownloader;
 import com.webscraper.scraping.ScraperService;
 
@@ -17,6 +18,10 @@ public class Main {
             for (String link : pdfLinks) {
                 downloader.downloadFile(link);
             }
+
+            FileCompressor fileCompressor = new FileCompressor(Config.OUTPUT_FOLDER, Config.OUTPUT_FOLDER+"anexos.zip");
+            fileCompressor.compressFiles();
+
         } catch(IOException e){
             e.printStackTrace();
         }
