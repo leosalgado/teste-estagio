@@ -1,21 +1,26 @@
 import pdfplumber
 import pandas as pd
 import zipfile
-import csv
 
 pdf_path = (
     "../1_webscraping/webscraper/downloads/Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf"
 )
 output_csv = "output.csv"
 
+dfs = []
+
 with pdfplumber.open(pdf_path) as pdf:
-    first_page = pdf.pages[2]
-    table = first_page.extract_table()
+    for page in pdf.pages:
+        table = page.extract_table()
+        if table:
+            df = pd.DataFrame(table)
 
-with open(output_csv, mode="w", newline="", encoding="utf-8") as file:
-    writer = csv.writer(file)
+            if not dfs:
+                dfs.append(df)
+            else:
+                dfs.append(df.iloc[1:])
 
-    for row in table:
-        writer.writerow(row)
+df_final = pd.concat(dfs, ignore_index=True)
+df_final.to_csv(output_csv, index=False, header=False)
 
 print(f"Arquivo CSV salvo como: {output_csv}")
