@@ -6,6 +6,8 @@ pdf_path = (
     "../1_webscraping/webscraper/downloads/Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf"
 )
 output_csv = "output.csv"
+name = "Leonardo"
+zip_name = f"Teste_{name}.zip"
 
 dfs = []
 
@@ -26,4 +28,7 @@ with pdfplumber.open(pdf_path) as pdf:
 df_final = pd.concat(dfs, ignore_index=True)
 df_final.to_csv(output_csv, index=False, header=False)
 
-print(f"Arquivo CSV salvo como: {output_csv}")
+with zipfile.ZipFile(zip_name, "w", zipfile.ZIP_DEFLATED) as zipf:
+    zipf.write(output_csv)
+
+print(f"Arquivo CSV salvo como: {output_csv} e compactado como: {zip_name}")
