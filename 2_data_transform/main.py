@@ -16,6 +16,9 @@ with pdfplumber.open(pdf_path) as pdf:
             df = pd.DataFrame(table)
 
             if not dfs:
+                df.iloc[0] = df.iloc[0].replace(
+                    {"OD": "Seg. Odontológica", "AMB": "Seg. Ambulatorial"}
+                )
                 dfs.append(df)
             else:
                 dfs.append(df.iloc[1:])
