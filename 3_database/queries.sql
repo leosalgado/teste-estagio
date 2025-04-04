@@ -12,7 +12,7 @@ JOIN
     ON os.registro_operadora = dc.reg_ans
 WHERE 
     dc.descricao ILIKE '%EVENTOS/ SINISTROS CONHECIDOS OU AVISADOS  DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR%'
-    AND dc.data_demonstrativo BETWEEN '2023-10-01' AND '2024-10-01'
+    AND dc.data_demonstrativo BETWEEN (DATE '2024-10-01' - INTERVAL '1 year') AND DATE '2024-10-01'
 GROUP BY 
     os.razao_social
 ORDER BY 
@@ -33,7 +33,7 @@ JOIN
     ON os.registro_operadora = dc.reg_ans
 WHERE 
     dc.descricao ILIKE '%EVENTOS/ SINISTROS CONHECIDOS OU AVISADOS  DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR%'
-    AND dc.data_demonstrativo BETWEEN '2024-07-01' AND '2024-10-01'
+    AND dc.data_demonstrativo BETWEEN (DATE '2024-10-01' - INTERVAL '3 months') AND DATE '2024-10-01'
 GROUP BY 
     os.razao_social
 ORDER BY 
