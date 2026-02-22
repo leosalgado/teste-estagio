@@ -1,6 +1,6 @@
 cffi==1.17.1
 charset-normalizer==3.4.1
-cryptography==44.0.2
+cryptography==46.0.5
 numpy==2.2.4
 pandas==2.2.3
 pdfminer.six==20250327
